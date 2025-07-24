@@ -31,16 +31,34 @@ public:
         }
     }
 
-    Node* getMiddle() {
-        Node* slow = head;
-        Node* fast = head;
+    // Node* getMiddle() {
+    //     Node* slow = head;
+    //     Node* fast = head;
 
-        while (fast != NULL && fast->next != NULL) {
-            slow = slow->next;
-            fast = fast->next->next;
-        }
-        return slow;
-    }
+    //     while (fast != NULL && fast->next != NULL) {
+    //         slow = slow->next;
+    //         fast = fast->next->next;
+    //     }
+    //     return slow;
+    // }
+
+		Node* middle(){
+			int cnt = 0;
+			Node* temp =head;
+			while(temp != NULL){
+				cnt++;
+				temp = temp->next;
+			
+			}
+
+			cnt /= 2;
+			temp = head;
+			while(cnt--){
+temp = temp->next;
+
+			}
+			return temp;
+		}
 
     void print() {
         Node* temp = head;
@@ -52,7 +70,7 @@ public:
     }
 
     void printMiddle() {
-        Node* mid = getMiddle();
+        Node* mid = middle();
         if (mid != NULL) {
             cout << "Middle element: " << mid->data << endl;
         } else {
@@ -72,5 +90,6 @@ int main() {
 
     li.print();         
     li.printMiddle();  
+		// li.middle();
     return 0;
 }
