@@ -1,68 +1,58 @@
-#include<iostream>
-#include<vector>
-using namespace std;
-
-void merge(int arr[],int s,int mid,int e){
-	vector<int>temp(e-s+1);
-
-	int left = s;
-	int right = mid+1;
-	int index = 0;
-
-	while(left <= mid && right <=e){
-		if(arr[left] <= arr[right]){
-			temp[index] = arr[left];
-					index++;
-	        left++;
-	
-		}
-
-		else{
-			temp[index] = arr[right];
-			  index++;
-      right++;
+class Solution {
+public:
     
-		}																		
-	}
+    ListNode* getmiddle(ListNode* head){
+        ListNode* slow = head;
+        ListNode* fast = head;
 
-	while(left <= mid){
-		temp[index] = arr[left];
-		index++;
-		left++;
-	}
-
-	while(right <= e){
-		temp[index] = arr[right];
-		index++;
-		right++;
-	}
-  for (int i = 0; i < temp.size(); i++) {
-        arr[s + i] = temp[i];
+        while(fast && fast->next && fast->next->next){
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        return slow;
     }
 
-}
-void mergesort(int arr[],int s,int e){
+    // Helper to merge two sorted lists
+    ListNode* merge(ListNode* left, ListNode* right){
+        if(left == NULL) return right;
+        if(right == NULL) return left;
 
-	// base condition
-	if(s >= e){
-		return;
-	}
+        ListNode* dummy = new ListNode(-1);
+        ListNode* temp = dummy;
 
-	int mid = s + (e-s)/2;
-	mergesort(arr,0,mid);
-	mergesort(arr,mid+1,e);
-	merge(arr,s,mid,e);
-}
-int main(){
-	int arr[]= {7,4,3,5,9,8,2,1,6};
-	int n = sizeof(arr)/sizeof(arr[0]);
+        while(left != NULL && right != NULL){
+            if(left->val < right->val){
+                temp->next = left;
+                left = left->next;
+            } else {
+                temp->next = right;
+                right = right->next;
+            }
+            temp = temp->next;
+        }
 
- mergesort(arr,0,8);
-   for (int i = 0; i < n; i++) {
-        cout << arr[i] << " ";
+        // Attach remaining nodes
+        if(left != NULL) temp->next = left;
+        if(right != NULL) temp->next = right;
+
+        ListNode* result = dummy->next;
+        delete dummy;
+        return result;
     }
 
-	
-	return 0;
+    // Main sort function using Merge Sort
+    ListNode* sortList(ListNode* head){
+        if(head == NULL || head->next == NULL){
+            return head;
+        }
 
-}
+        ListNode* mid = getmiddle(head);
+        ListNode* right = mid->next;
+        mid->next = NULL;
+
+        ListNode* left = sortList(head);
+        right = sortList(right);
+
+        return merge(left, right);
+    }
+};
