@@ -1,0 +1,42 @@
+/*
+The structure of linked list is the following
+
+struct Node {
+  int data;
+  struct Node *next;
+  Node(int x) {
+    data = x;
+    next = NULL;
+  }
+};
+# this approch givs runtime error bcoz of nested loop so this cant we a feasible approch
+
+class Solution {
+  public:
+    Node *removeDuplicates(Node *head) {
+        // your code goes here
+        if(!head) return NULL;
+        
+        Node* curr = head;
+        while(curr){
+            Node* runner = curr;
+            while(runner->next){
+                if(runner->next->data == curr->data){
+                    Node* temp = runner->next;
+                    runner->next = runner->next->next;
+                    delete temp;
+                }
+                else{
+                    runner = runner->next;
+                    
+                }
+            }
+            curr = curr->next;
+        }
+        
+        return head;
+        
+        
+        
+    }
+};
