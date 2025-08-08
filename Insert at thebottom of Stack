@@ -1,0 +1,14 @@
+int insertatBottom(stack<int>&st,int val){
+	stack<int>stsec;
+  
+	while(!st.empty){
+		stsec.push(st.top());
+		st.pop();
+	}
+	st.push(val);
+	while(!stsec.empty){
+		st.push(stsec.top());
+		stsec.pop();
+	}
+	return st;
+}
