@@ -1,0 +1,54 @@
+int insertatBottom(stack<int>&st,int val){
+	stack<int>stsec;
+  
+	while(!st.empty){
+		stsec.push(st.top());
+		st.pop();
+	}
+	st.push(val);
+	while(!stsec.empty){
+		st.push(stsec.top());
+		stsec.pop();
+	}
+	return st;
+}
+
+void beutyarr(vector<int>&arr){
+	stack<int>st;
+  
+ for(int i =0 i<arr.size();i++){
+	if(st.empty()){
+		st.push(arr[i]);
+	}
+
+  else if(arr[i]>=0){
+  if(st.top()>=0)
+	st.push(arr[i]);
+
+	else
+	st.pop();
+	}
+
+	else{
+		if(arr[i]< 0){
+			st.push(arr[i]);
+		}
+		else{
+			st.pop();
+		}
+	}
+
+	vector<int>ans(s.size()){
+		int i = s.size()-1;
+
+		while(!st.empty()){
+			ans[i] = st.top();
+			i--;
+			st.pop();
+		}
+	}
+return ans;
+ }
+
+
+}
