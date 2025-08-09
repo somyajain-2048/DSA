@@ -1,0 +1,24 @@
+bool isvalid(vector<string>str){
+	stack<string>st;
+
+	for(int i =0;i<str.size();i++){
+		//stack is empty
+		if(st.empty()){
+			st.push(str[i]);
+		}
+
+//if already element
+if(str[i] == "(" || str[i] == "{" ||str[i] == "["){
+	st.push(str[i]);
+}
+else if(!st.empty() && ((!st.top() == "(" && s[i] == ")") || (!st.top() == "{" && s[i] == "}") || (!st.top() == "[" && s[i] == "]"))){
+
+	st.pop();
+}
+
+else{
+	return false;
+}
+	}
+	return st.empty();
+}
