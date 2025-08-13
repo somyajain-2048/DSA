@@ -1,0 +1,35 @@
+#include <iostream>
+#include <stack>
+#include <vector>
+using namespace std;
+
+vector<int> bracketNumbers(string &s) {
+    vector<int> res;
+    stack<int> st;
+    
+    int count = 0;
+    for (int i = 0; i < s.size(); i++) {
+        if (s[i] == '(') {
+            count++;
+            res.push_back(count);
+            st.push(count);
+        }
+        else if (s[i] == ')') {
+            res.push_back(st.top());
+            st.pop();
+        }
+    }
+
+    return res;
+}
+int main() {
+    string s = "(aa(bdc))p(dee)";
+    vector<int> result = bracketNumbers(s);
+    
+    for (int num : result) {
+        cout << num << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
