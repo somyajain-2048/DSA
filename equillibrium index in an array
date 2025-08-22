@@ -1,0 +1,22 @@
+#inckude<iostream>
+using namespace std;
+int equllibrium(vector<int>&arr){
+int prefix = 0;
+int total = 0;
+
+for(int i = 0 ;i<arr.size();i++){
+total += arr[i];
+}
+
+for(int pivot = 0 ;pivot<arr.size();pivot++){
+int suffix = total-prefix-arr[pivot];
+
+
+if(prefix == suffix){
+return pivot;
+}
+prefix += arr[pivot];
+}
+
+rerurn -1;
+}
