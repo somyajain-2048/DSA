@@ -1,0 +1,61 @@
+
+ class Node{
+public:
+ 	int data;
+ 	Node* next;
+
+	public:
+ 	Node(val){
+		data = val;
+		next = NULL;
+	}
+};
+
+class queue{
+	Node* front;
+	Node* rear;
+	
+	public:
+	queue(){
+		front= rear = NULL;
+	}
+
+	bool isEmpty(){
+		return front == NULL;
+	}
+
+void push(int x){
+if(isEmpty()){
+front = rear = new Node(x);
+return;
+}
+else {
+rear->next = new Node(x);
+rear = rear->next;
+}
+}
+
+void pop(){
+	if(isEmpty()){
+cout<<"queue is underflow";
+
+else {
+	Node* temp = rear;
+  rear = rear->next;
+	delete temp;
+}
+
+}
+}
+
+int start(){
+	if(isEmpty()){
+		cout<<"queue is empty";
+		return -1;
+	}
+	else{
+return front->data;
+	
+	}
+}
+}
