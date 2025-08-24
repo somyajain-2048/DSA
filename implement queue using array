@@ -1,0 +1,79 @@
+#include<iostream>
+#include<queue>
+
+class queue{
+	int *arr;
+	int size;
+	int front;
+	int rear;
+
+	queue(int n){
+		arr = new int[n];
+		size = n;
+		front = rear = -1;
+	}
+
+	// check if empty
+	bool isempty(){
+		return (front == -1);
+	}
+
+	bool isfull(){
+		return rear = size-1;
+	}
+
+	void push(int x){
+  // empty
+	if(isempty()){
+		front = rear = 0;
+		arr[0]= x;
+		return;
+	}
+
+	// full
+   else	if(isfull()){
+		cout<<"queue is overflow";
+		return;
+	}
+
+	//insert
+	else{
+   rear = rear+1;
+   arr[rear]= x;
+	}
+
+	}
+ void pop(){
+	//empty
+	if(isempty()){
+		cout<<"queue underflow";
+		return;
+	}
+	else{
+		if(front == rear){
+      front = rear = -1;
+		}
+		else{
+			front = front+1;
+		}
+	}
+ }
+
+ int start(){
+	if(isempty()){
+		cout<<"queue is empty";
+		return -1;
+	}
+	else{
+		return arr[front];
+	}
+ }
+
+};
+
+int main(){
+	queue q(5);
+	q.push(2);
+	q.push(4);
+	q.psuh(7);
+}
