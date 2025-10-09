@@ -1,0 +1,82 @@
+Input:
+[2, 4, 7, 9, 2, 4]
+Output:
+7 and 9
+
+✅ FULL EXPLANATION (Step-by-step)
+✅ Step 1: XOR all numbers
+xorAll = 2 ^ 4 ^ 7 ^ 9 ^ 2 ^ 4
+Duplicates cancel:
+xorAll = 7 ^ 9
+
+
+Now xorAll = difference of two unique numbers.
+
+✅ Step 2: Find a bit where they differ
+
+We use:
+
+int rightmostSetBit = xorAll & (-xorAll);
+
+
+This picks the rightmost 1 bit in xorAll.
+
+This bit tells us that:
+✅ One unique number has this bit = 1
+✅ The other has this bit = 0
+
+✅ Step 3: Divide numbers into 2 groups:
+
+Group 1: bit = 1 at that position
+
+Group 2: bit = 0
+
+XOR separately, duplicates cancel out.
+
+✅ FINAL C++ CODE (Clean + Commented)
+#include <iostream>
+#include <vector>
+using namespace std;
+
+vector<int> findTwoUnique(vector<int>& nums) {
+    int xorAll = 0;
+    
+    // Step 1: XOR all numbers
+    for(int x : nums) {
+        xorAll ^= x;
+    }
+    
+    // Step 2: Find rightmost set bit
+    int rightmostSetBit = xorAll & (-xorAll);
+    
+    int num1 = 0, num2 = 0;
+    
+    // Step 3: Divide numbers into 2 groups and XOR separately
+    for(int x : nums) {
+        if(x & rightmostSetBit) {
+            num1 ^= x;   // Group 1
+        } else {
+            num2 ^= x;   // Group 2
+        }
+    }
+    
+    return {num1, num2};  // The two unique numbers
+}
+
+int main() {
+    vector<int> nums = {2, 4, 7, 9, 2, 4};
+    vector<int> result = findTwoUnique(nums);
+    
+    cout << "The two unique numbers are: "
+         << result[0] << " and " << result[1] << endl;
+    
+    return 0;
+}
+
+✅ Output:
+The two unique numbers are: 7 and 9
+
+✅ Why is this method BEST?
+
+✅ O(n) time (single loop)
+✅ O(1) space (no extra data structures)
