@@ -1,1 +1,11 @@
+refrences stores the address to a variable.
 
+string food = "Pizza";  
+string &meal = food; 
+
+
+string food = "Pizza";
+string &meal = food;
+
+cout << food << "\n";  // Outputs Pizza
+cout << meal << "\n";  // Outputs Pizza
