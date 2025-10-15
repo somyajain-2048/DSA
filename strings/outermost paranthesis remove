@@ -1,0 +1,23 @@
+class Solution {
+public:
+    string removeOuterParentheses(string s) {
+      string ans = "";
+      int OpenCount = 0;
+
+      for(int i = 0;i<s.length();i++){
+        if(s[i] == '('){
+            if(OpenCount > 0)
+            ans += '(';
+            OpenCount += 1;
+        }
+
+        else {
+            OpenCount--;
+            if(OpenCount > 0){
+                ans += ')';
+            }
+        }
+      }
+      return ans;
+    }
+};
